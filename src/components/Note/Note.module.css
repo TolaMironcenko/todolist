@@ -25,10 +25,9 @@
     position: absolute;
     top: 0;
     left: 0;
-	width: 100%;
+	width: 70%;
     height: 100%;
     padding: 15px;
-    /* line-height: 0; */
 	text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
