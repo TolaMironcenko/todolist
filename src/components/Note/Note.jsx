@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './Note.module.css'
-import classnames from classnames
+import classNames from 'classnames';
 
 const Note = ({activeNote, setNotes, id, notes, settext, setActiveNote, title, ...props}) => {
     return (
         <div 
             id={id}
-            className={activeNote === id?styles.note:classnames(styles.note, styles.active)} 
+            className={activeNote === id?styles.note:classNames(styles.note, styles.active)} 
             {...props}
         >
             <h3 
