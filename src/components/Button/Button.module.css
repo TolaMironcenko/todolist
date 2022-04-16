@@ -1,0 +1,12 @@
+.Button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: aquamarine;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.Button:hover {
+    background-color: rgb(191, 247, 228);
+}
