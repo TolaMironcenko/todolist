@@ -2,33 +2,12 @@ import React from 'react';
 import styles from './Note.module.css'
 import classNames from 'classnames';
 
-const Note = ({activeNote, setNotes, id, notes, settext, setActiveNote, title, ...props}) => {
-
-    const removeTask = (e) => {
-        for (var i = 0; i < notes.length; i++) {
-          if (notes[i].id == e.target.id) {
-              let copy = notes
-              copy.splice(i, 1)
-              setNotes(copy)
-          }
-        }
-        if (notes.length != 0) {
-            setActiveNote(notes[notes.length-1].id)
-            console.log(notes[notes.length-1].id)
-            settext(notes[notes.length-1].text)
-            console.log(notes[notes.length-1].text)
-        }
-        else{
-            setActiveNote()
-            settext('')
-        }
-        console.log(notes)
-      }
+const Note = ({removeTask, activeNote, setNotes, id, notes, settext, setActiveNote, title, ...props}) => {
 
     return (
         <div 
             id={id}
-            className={activeNote === id?styles.note:classNames(styles.note, styles.active)} 
+            className={activeNote != id?styles.note:classNames(styles.note, styles.active)} 
             {...props}
         >
             <h3 
@@ -46,7 +25,7 @@ const Note = ({activeNote, setNotes, id, notes, settext, setActiveNote, title, .
                 id={id}
                 className={styles.delete}
                 onClick={(e) => {
-                    removeTask(e)
+                    removeTask(e.target.id)
                 }}
             >
                 delete

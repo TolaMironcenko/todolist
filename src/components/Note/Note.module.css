@@ -14,7 +14,8 @@
 }
 
 .note.active {
-    background-color: rgb(244, 108, 235);
+    background-color: rgb(60, 9, 56);
+    color: wheat;
 }
 
 .note:hover {

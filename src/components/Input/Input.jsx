@@ -10,9 +10,9 @@ const Input = ({id, text, setText, notes, setNotes, ...props}) => {
             <textarea 
                 id={id}
                 className={styles.input} 
-                disabled={notes.length === 0}
+                disabled={notes.length == 0}
                 value={text}
-                placeholder={notes.length === 0?' ':'Write text'}
+                placeholder={notes.length == 0?'':'Write text'}
                 onChange={(e) => {
                     setText(e.target.value)
                     for (var i = 0; i < notes.length; i++) {
