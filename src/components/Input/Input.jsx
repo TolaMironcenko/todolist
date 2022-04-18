@@ -6,7 +6,12 @@ const Input = ({id, text, setText, notes, setNotes, ...props}) => {
     const [label, setlabel] = useState(0)
 
     return (
-        <div className={styles.in}>
+        <div 
+            className={styles.in} 
+            style={notes.length === 0
+                ?{display: 'none'}
+                :{display: 'block'}}
+        >
             <textarea 
                 id={id}
                 className={styles.input} 
