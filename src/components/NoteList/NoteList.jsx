@@ -23,7 +23,6 @@ const NoteList = () => {
     setNotes([nn, ...notes])
     setActiveNote(nn.id)
     setText('')
-    console.log(notes)
   }
 
   const removeTask = (id) => {
