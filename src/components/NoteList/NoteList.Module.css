@@ -1,3 +1,13 @@
-.notes-and-edit {
+.notesandedit {
     display: flex;
+}
+
+.noteList {
+    background-color: black;
+    height: 500px;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 10px;
 }

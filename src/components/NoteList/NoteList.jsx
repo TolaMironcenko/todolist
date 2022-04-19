@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import React from 'react'
-import styles from './NoteList.Module.css'
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import Note from '../Note/Note'
 import EditLayout from '../../layouts/EditLayout/EditLayout';
 import NotesLayout from '../../layouts/NotesLayout/NotesLayout';
 import TopLayout from '../../layouts/TopLayout/TopLayout';
+import styles from './NoteList.module.css'
 
 const NoteList = () => {
   
@@ -41,11 +41,11 @@ const NoteList = () => {
   }
 
   return (
-    <>
+    <div className={styles.noteList}>
       <TopLayout>
         <Button onClick={()=>newNote()}>New Note</Button>
       </TopLayout>
-      <div className='notes-and-edit'>
+      <div className={styles.notesandedit}>
         <NotesLayout>
           {
             notes.length === 0
@@ -80,7 +80,7 @@ const NoteList = () => {
           />
         </EditLayout>
       </div>
-    </>
+    </div>
   );
 }
 
