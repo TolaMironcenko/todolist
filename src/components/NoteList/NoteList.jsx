@@ -44,6 +44,12 @@ const NoteList = () => {
     <div className={styles.noteList}>
       <TopLayout>
         <Button onClick={()=>newNote()}>New Note</Button>
+        <Button 
+          onClick={()=>setNotes([])}
+          style={{marginLeft: '15px'}}
+        >
+          Delete all
+        </Button>
       </TopLayout>
       <div className={styles.notesandedit}>
         <NotesLayout>
