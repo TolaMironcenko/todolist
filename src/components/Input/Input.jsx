@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Input.module.css'
 
-const Input = ({id, text, setText, notes, setNotes, ...props}) => {
+const Input = ({handleUpdateDatabase, id, text, setText, notes, setNotes, ...props}) => {
 
     const [label, setlabel] = useState(0)
 
@@ -25,6 +25,7 @@ const Input = ({id, text, setText, notes, setNotes, ...props}) => {
                             let copy = notes
                             copy[i].text = e.target.value
                             setNotes(copy)
+                            handleUpdateDatabase(notes[i])
                             break
                         }
                     }

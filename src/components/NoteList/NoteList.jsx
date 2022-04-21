@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react'
 import Button from '../Button/Button';
 import Input from '../Input/Input';
@@ -7,12 +7,52 @@ import EditLayout from '../../layouts/EditLayout/EditLayout';
 import NotesLayout from '../../layouts/NotesLayout/NotesLayout';
 import TopLayout from '../../layouts/TopLayout/TopLayout';
 import styles from './NoteList.module.css'
+import { db } from '../../base';
+import { set, ref, onValue, remove, update } from 'firebase/database'
 
 const NoteList = () => {
   
   const [notes, setNotes] = useState([])
   const [activeNote, setActiveNote] = useState()
   const [text, setText] = useState('')
+
+  useEffect(() => {
+    onValue(ref(db), snapshot => {
+      setNotes([])
+      const data = snapshot.val()
+      if (data !== null) {
+        Object.values(data).map(note => {
+          setNotes(notes => [note, ...notes])
+        })
+      }
+    })
+  }, [])
+
+  const writeDatabase = (todo, title, text, id) => {
+    set(ref(db, `/${todo.id}`), {
+      title,
+      text,
+      id,
+    })
+  }
+
+  const handleDeleteFromDatabase = (id) => {
+    remove(ref(db, `${id}`))
+  }
+
+  const handleUpdateDatabase = (note) => {
+    update(ref(db, `/${note.id}`), {
+      title: note.title,
+      text: note.text,
+      id: note.id,
+    })
+  }
+
+  const delteAllFromDatabase = () => {
+    notes.map(note => {
+      handleDeleteFromDatabase(note.id)
+    })
+  }
 
   const newNote = () => {
     const nn = {
@@ -23,6 +63,7 @@ const NoteList = () => {
     setNotes([nn, ...notes])
     setActiveNote(nn.id)
     setText('')
+    writeDatabase(nn, nn.title, nn.text, nn.id)
   }
 
   const removeTask = (id) => {
@@ -37,15 +78,25 @@ const NoteList = () => {
       setText(notes[notes.length-1].text)
       console.log(notes[notes.length-1].text)
     }
-    console.log(notes)
+    handleDeleteFromDatabase(id)
+    // console.log(notes)
   }
 
   return (
     <div className={styles.noteList}>
       <TopLayout>
+        <Button 
+          onClick={() => setActiveNote()}
+          style={{marginRight: '15px'}}
+        >
+          back
+        </Button>
         <Button onClick={()=>newNote()}>New Note</Button>
         <Button 
-          onClick={()=>setNotes([])}
+          onClick={()=> {
+            delteAllFromDatabase()
+            setNotes([])
+          }}
           style={{marginLeft: '15px'}}
         >
           Delete all
@@ -63,9 +114,9 @@ const NoteList = () => {
                 </Button>
               : notes.map((note) => (
                   <Note 
+                    key={note.id}
                     title={note.text} 
                     id={note.id} 
-                    key={note.id}
                     settext={setText}
                     notes={notes}
                     setNotes={setNotes}
@@ -83,6 +134,7 @@ const NoteList = () => {
             id={activeNote}
             text={text}
             setText={setText}
+            handleUpdateDatabase={handleUpdateDatabase}
           />
         </EditLayout>
       </div>
