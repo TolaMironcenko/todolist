@@ -1,4 +1,4 @@
-FROM node:current-alpine
+FROM i386/node
 WORKDIR /app
 
 COPY package*.json ./
