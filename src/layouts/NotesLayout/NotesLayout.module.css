@@ -1,6 +1,6 @@
 .notes {
     width: 30%;
-    height: 430px;
+    height: 100%;
     background-color: blueviolet;
     overflow-y: auto;
     border-radius: 10px;
